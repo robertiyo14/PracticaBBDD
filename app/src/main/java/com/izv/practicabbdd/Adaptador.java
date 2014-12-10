@@ -2,6 +2,7 @@ package com.izv.practicabbdd;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class Adaptador extends CursorAdapter {
         tvNombre.setText(j.getNombre());
         tvFnac.setText(j.getFnac());
         tvTelefono.setText(j.getTelefono());
+        tvValoracion.setText(gj.obtenerMedia(j.getId())+"");
     }
 }
 

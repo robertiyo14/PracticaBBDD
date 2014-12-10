@@ -31,7 +31,6 @@ public class Principal extends Activity {
         etTelefono = (EditText)findViewById(R.id.etTelefono);
         etValoracion = (EditText)findViewById(R.id.etValoracion);
         btGuardar=(Button)findViewById(R.id.btGuardar);
-
     }
 
     @Override
@@ -42,17 +41,6 @@ public class Principal extends Activity {
         ad = new Adaptador(this, c);
         final ListView lv =(ListView) findViewById(R.id.lvLista);
         lv.setAdapter(ad);
-        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor cursor=(Cursor)lv.getItemAtPosition(position);
-                Jugador j=gj.getRow(cursor);
-                gj.delete(j);
-                //el changecursor se usa para actualizar los datos del cursor
-                ad.changeCursor(gj.getCursor(null,null,null));
-                return false;
-            }
-        });
     }
 
     @Override
@@ -72,5 +60,6 @@ public class Principal extends Activity {
         Cursor c = gj.getCursor(null,null,null);
         ad.changeCursor(c);
     }
+
 
 }

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,21 @@ public class GestionJugador {
         return alj;
     }
 
+    public double obtenerMedia(long id){
+        String[] s = new String[]{id+""};
+        Cursor c = getCursorGeneral(Contrato.TablaPartido.IDJUGADOR+" = ?",s,null);
+        c.moveToFirst();
+        int valoracion=0;
+        double valoracionMedia=0;
+        int contador = 0;
+        while(!c.isAfterLast()){
+            valoracion+=c.getInt(0);
+            contador++;
+        }
+        valoracionMedia = valoracion/contador;
+        return valoracionMedia;
+    }
+
     public List<Jugador>  select(){
         return select(null,null,null);
     }
@@ -99,4 +115,11 @@ public class GestionJugador {
         Cursor cursor = bd.query(Contrato.TablaJugador.TABLA, null, condicion, parametros, null, null,orden);
         return cursor;
     }
+
+    public Cursor getCursorGeneral( String condicion, String[] parametros, String orden) {
+        Cursor cursor = bd.query(Contrato.TablaPartido.TABLA , null, condicion, parametros, null, null,orden);
+        return cursor;
+    }
+
+
 }
